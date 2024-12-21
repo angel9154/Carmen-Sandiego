@@ -106,3 +106,92 @@ SELECT * FROM city WHERE countrycode = 'SMR';
  3170 | Serravalle | SMR         | Serravalle/Dogano |       4802
  3171 | San Marino | SMR         | San Marino        |       2294
 (2 rows)
+
+carmen=#
+
+SELECT * FROM city WHERE name = 'San';
+ id | name | countrycode | district | population
+----+------+-------------+----------+------------
+(0 rows)
+
+carmen=#
+
+SELECT * FROM city WHERE name = 'San Paulo';
+ id | name | countrycode | district | population
+----+------+-------------+----------+------------
+(0 rows)
+
+carmen=#
+
+SELECT * FROM city WHERE name LIKE= 'San%';
+ERROR:  syntax error at or near "="
+LINE 1: SELECT * FROM city WHERE name LIKE= 'San%';
+                                          ^
+carmen=#
+carmen=#
+
+SELECT * FROM city WHERE name LIKE = 'San%';
+ERROR:  syntax error at or near "="
+LINE 1: SELECT * FROM city WHERE name LIKE = 'San%';
+                                           ^
+carmen=# SELECT * FROM city WHERE name ILIKE 'san%';SELECT name FROM city WHERE name LIKE 'San%';^Z
+[1]  + 1516 suspended  psql
+➜  ~ psql
+psql (16.6 (Ubuntu 16.6-1.pgdg24.04+1))
+Type "help" for help.
+
+gerena13=# \c carmen
+You are now connected to database "carmen" as user "gerena13".
+carmen=# SELECT name FROM city WHERE name LIKE 'San%';
+carmen=# SELECT name FROM city WHERE name LIKE 'Serra%';
+    name
+------------
+ Serra
+ Serravalle
+(2 rows)
+
+carmen=# SELECT * FROM city WHERE name LIKE 'San%';
+carmen=# SELECT * FROM country WHERE capital LIKE 'Bras%';
+ERROR:  operator does not exist: integer ~~ unknown
+LINE 1: SELECT * FROM country WHERE capital LIKE 'Bras%';
+                                            ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+carmen=#
+carmen=# SELECT * FROM country WHERE capital LIKE 'Bras%';
+ERROR:  operator does not exist: integer ~~ unknown
+LINE 1: SELECT * FROM country WHERE capital LIKE 'Bras%';
+                                            ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+carmen=# SELECT * FROM country WHERE capital ='Brasilia';
+ERROR:  invalid input syntax for type integer: "Brasilia"
+LINE 1: SELECT * FROM country WHERE capital ='Brasilia';
+                                             ^
+carmen=# SELECT * FROM country WHERE capital ='Brasilia';
+ERROR:  invalid input syntax for type integer: "Brasilia"
+LINE 1: SELECT * FROM country WHERE capital ='Brasilia';
+                                             ^
+carmen=# SELECT * FROM country WHERE capital = 'Brasilia';
+ERROR:  invalid input syntax for type integer: "Brasilia"
+LINE 1: SELECT * FROM country WHERE capital = 'Brasilia';
+                                              ^
+carmen=#
+carmen=# SELECT * FROM country WHERE capital = 'Brasilia';
+ERROR:  invalid input syntax for type integer: "Brasilia"
+LINE 1: SELECT * FROM country WHERE capital = 'Brasilia';
+                                              ^
+carmen=# SELECT * FROM country WHERE name = 'Brazil';
+carmen=# SELECT * FROM city WHERE population = 91085;
+ id | name | countrycode | district | population
+----+------+-------------+----------+------------
+(0 rows)
+
+carmen=# SELECT * FROM city WHERE population = 91086;
+ id | name | countrycode | district | population
+----+------+-------------+----------+------------
+(0 rows)
+
+carmen=# SELECT * FROM city WHERE population = 91084;
+  id  |     name     | countrycode |  district  | population
+------+--------------+-------------+------------+------------
+ 4060 | Santa Monica | USA         | California |      91084
+(1 row)
